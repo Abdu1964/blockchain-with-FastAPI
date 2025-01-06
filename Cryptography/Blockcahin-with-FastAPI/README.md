@@ -1,103 +1,110 @@
-Blockchain FastAPI Implementation
-This project implements a simple blockchain with FastAPI endpoints to mine new blocks, accept transactions, add blocks to the chain, and fetch the current blockchain. It demonstrates basic blockchain concepts and validation using Python and FastAPI.
+# Blockchain FastAPI & UTXO Blockchain Implementation
 
-Objective
-The goal of this project is to implement FastAPI endpoints for the following blockchain functionalities:
+## Overview
+This project demonstrates two blockchain implementations:
 
-Mining a new block.
-Accepting new transactions.
-Adding received blocks to the chain.
-Additionally, a /chain endpoint is provided to return the current blockchain.
+1. **Blockchain FastAPI Implementation** - A simple blockchain with FastAPI endpoints for mining blocks, accepting transactions, adding blocks, and fetching the blockchain.
+2. **UTXO Blockchain Implementation** - A blockchain using the Unspent Transaction Output (UTXO) model to handle transactions, including UTXO generation, signing, verification, and processing.
 
-Requirements
-Endpoints:
-/mine_block: Trigger mining of a new block and add it to the chain.
+## Blockchain FastAPI Implementation
 
-Method: POST
-Response: Success or error message with the mined block data.
-/new_transaction: Accept transaction data (sender, receiver, amount, input utxos, output utxos, signature) and add it to a list of pending transactions.
+### Objective
+The goal is to implement FastAPI endpoints to manage blockchain functionalities:
 
-Method: POST
-Body:
-json
-Copy code
-{
-  "sender": "sender_address",
-  "receiver": "receiver_address",
-  "amount": 10,
-  "input_utxos": ["utxo1", "utxo2"],
-  "output_utxos": ["utxo3", "utxo4"],
-  "signature": "transaction_signature"
-}
-Response: Success message.
-/add_block: Accept a block (e.g., from another node) and validate it before appending to the chain.
+- Mining a new block.
+- Accepting new transactions.
+- Adding received blocks to the chain.
+- Fetching the current blockchain.
 
-Method: POST
-Body:
-json
-Copy code
-{
-  "index": 1,
-  "transactions": [{"sender": "sender_address", "receiver": "receiver_address", "amount": 10}],
-  "previous_hash": "previous_hash_value",
-  "proof": 123456,
-  "timestamp": 1638246823
-}
-Response: Success or error message.
-/chain: Returns the current blockchain.
+### Requirements
+- Python 3.x
+- FastAPI and Uvicorn for serving the application.
 
-Method: GET
-Response: List of all blocks in the blockchain.
-Blockchain Functions:
-Mining: The blockchain mines a new block by solving a proof-of-work problem, validating transactions, and appending the block to the chain.
-Transactions: Transactions are added to a pending list and mined into a block when a new block is created.
-Block Validation: Blocks are validated before being added to the chain to ensure they are properly linked and meet consensus rules.
-How to Run
-Requirements:
-Python 3.x
-Install dependencies:
-bash
-Copy code
+### Endpoints:
+
+#### `/mine_block`
+- **Method**: POST
+- **Response**: Success or error message with mined block data.
+
+#### `/new_transaction`
+- Accepts transaction data (sender, receiver, amount, input UTXOs, output UTXOs, signature) and adds it to a list of pending transactions.
+- **Method**: POST
+- **Body**:
+    ```json
+    {
+      "sender": "sender_address",
+      "receiver": "receiver_address",
+      "amount": 10,
+      "input_utxos": ["utxo1", "utxo2"],
+      "output_utxos": ["utxo3", "utxo4"],
+      "signature": "transaction_signature"
+    }
+    ```
+- **Response**: Success message.
+
+#### `/add_block`
+- Accepts a block and validates it before appending it to the chain.
+- **Method**: POST
+- **Body**:
+    ```json
+    {
+      "index": 1,
+      "transactions": [{"sender": "sender_address", "receiver": "receiver_address", "amount": 10}],
+      "previous_hash": "previous_hash_value",
+      "proof": 123456,
+      "timestamp": 1638246823
+    }
+    ```
+- **Response**: Success or error message.
+
+#### `/chain`
+- Returns the current blockchain.
+- **Method**: GET
+- **Response**: List of all blocks in the blockchain.
+
+### Blockchain Functions:
+- **Mining**: Mines new blocks via a proof-of-work algorithm.
+- **Transactions**: Adds pending transactions to a mined block.
+- **Block Validation**: Ensures blocks are valid before adding them to the chain.
+
+### How to Run:
+
+#### Install dependencies:
+```bash
 pip install fastapi uvicorn
-Running the FastAPI Application:
-Save the provided blockchain.py and fastapi.py files to your project directory.
-Run the FastAPI app with:
-bash
-Copy code
+Run the FastAPI app:
+
 uvicorn fastapi:app --reload
-Open a browser and go to http://127.0.0.1:8000/docs to interact with the API using the automatically generated Swagger UI.
-Example of Usage:
-Mine a block:
+Open the browser and go to http://127.0.0.1:8000/docs to interact with the API using Swagger UI.
+```
 
-POST to /mine_block.
-The server will mine a new block and add it to the chain.
-Add a new transaction:
+### Example Usage:
 
-POST to /new_transaction with transaction data.
-Add a received block:
+- **Mine a Block**:  
+  `POST /mine_block`
 
-POST to /add_block with block data.
-Get the blockchain:
+- **Add a New Transaction**:  
+  `POST /new_transaction` with transaction data.
 
-GET to /chain to retrieve the current blockchain.
-Code Explanation
-blockchain.py:
-This file contains the logic for the blockchain, including block creation, mining, transaction handling, and block validation. It defines two classes:
+- **Add a Block**:  
+  `POST /add_block` with block data.
 
-Block: Represents a single block in the blockchain.
-Blockchain: Manages the chain, mining process, transactions, and block validation.
-fastapi.py:
-This file contains the FastAPI endpoints for interacting with the blockchain. It defines routes for:
+- **Get the Blockchain**:  
+  `GET /chain` to retrieve the current blockchain.
 
-Mining blocks (/mine_block).
-Adding transactions (/new_transaction).
-Adding blocks (/add_block).
-Retrieving the chain (/chain).
-Features and Enhancements:
-Basic Proof-of-Work: Implements a simple proof-of-work algorithm where the hash of the proof must start with a "0" (to simulate difficulty).
-Transaction Handling: Pending transactions are collected and mined into blocks.
-Block Validation: Before adding any new block to the chain, the block is validated against the previous block's hash and index.
-Possible Enhancements:
-Consensus Mechanism: Improve the consensus by implementing a more sophisticated algorithm for validating blocks across multiple nodes.
-Blockchain UI: Create a user interface to display the blockchain and transaction history.
-Transaction Pool: Manage pending transactions with more complex structures.
+## Code Explanation:
+
+- **blockchain.py**: Contains the blockchain logic (block creation, mining, transactions).
+- **fastapi.py**: Defines FastAPI endpoints for interacting with the blockchain.
+
+## Features and Enhancements:
+
+- **Proof-of-Work**: Simple proof-of-work where the hash of the proof must start with a "0".
+- **Transaction Handling**: Transactions are added to the chain once mined.
+- **Block Validation**: Ensures blocks are properly linked.
+
+## Future Enhancements:
+
+- **Consensus Mechanism**: Implement a more advanced algorithm for block validation across multiple nodes.
+- **Blockchain UI**: Create an interface to visualize the blockchain.
+- **Transaction Pool**: Manage pending transactions with a more complex system.
