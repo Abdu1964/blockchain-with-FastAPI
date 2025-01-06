@@ -1,3 +1,4 @@
+
 # Blockchain FastAPI & UTXO Blockchain Implementation
 
 ## Overview
@@ -172,3 +173,20 @@ Current UTXO Set:
 UTXO: 98e9e6f9e2d47dffed9b77c13ec4fcb48fd8f4ea8f1d40e4b8c5a8273952ba76, Amount: 70, Recipient: Alice
 UTXO: 1284c11c42380f29f9cde543a2e31f2e3a98842a4a2633d66b4b70f94d6b0f52, Amount: 10, Recipient: Bob
 UTXO: b3f3ac98fca1a50dbf9cf1e0cf30be51b25f62a7b923d1be328c82a6c498e7a9, Amount: 20, Recipient: Charlie
+
+Running the Project
+Clone the repository (if you haven’t already):
+
+git clone https://github.com/your-username/utxo-blockchain.git
+cd utxo-blockchain
+Install dependencies:
+
+pip install cryptography
+Run the script:
+
+python main.py
+
+Future Enhancements
+Implement additional blockchain features like block mining, proof-of-work, and block validation.
+Integrate a peer-to-peer network for decentralized transaction processing.
+Implement a more complex UTXO management system (e.g., handling change and more granular transaction outputs).
