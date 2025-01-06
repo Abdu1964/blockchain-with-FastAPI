@@ -72,7 +72,7 @@ The goal is to implement FastAPI endpoints to manage blockchain functionalities:
 
 #### Install dependencies:
 ```bash
-pip install fastapi uvicorn
+pip install -r requirements.txt
 Run the FastAPI app:
 
 uvicorn fastapi:app --reload
@@ -185,7 +185,7 @@ git clone https://github.com/your-username/utxo-blockchain.git
 cd utxo-blockchain
 Install dependencies:
 
-pip install cryptography
+pip install -r requirements.txt
 Run the script:
 
 python main.py
