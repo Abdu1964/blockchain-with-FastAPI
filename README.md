@@ -72,3 +72,7 @@ The goal is to implement FastAPI endpoints to manage blockchain functionalities:
 #### Install dependencies:
 ```bash
 pip install fastapi uvicorn
+Run the FastAPI app:
+
+uvicorn fastapi:app --reload
+Open the browser and go to http://127.0.0.1:8000/docs to interact with the API using Swagger UI.
