@@ -76,3 +76,34 @@ Run the FastAPI app:
 
 uvicorn fastapi:app --reload
 Open the browser and go to http://127.0.0.1:8000/docs to interact with the API using Swagger UI.
+# Example Usage:
+
+- **Mine a Block**:  
+  `POST /mine_block`
+
+- **Add a New Transaction**:  
+  `POST /new_transaction` with transaction data.
+
+- **Add a Block**:  
+  `POST /add_block` with block data.
+
+- **Get the Blockchain**:  
+  `GET /chain` to retrieve the current blockchain.
+
+## Code Explanation:
+
+- **blockchain.py**: Contains the blockchain logic (block creation, mining, transactions).
+- **fastapi.py**: Defines FastAPI endpoints for interacting with the blockchain.
+
+## Features and Enhancements:
+
+- **Proof-of-Work**: Simple proof-of-work where the hash of the proof must start with a "0".
+- **Transaction Handling**: Transactions are added to the chain once mined.
+- **Block Validation**: Ensures blocks are properly linked.
+
+## Future Enhancements:
+
+- **Consensus Mechanism**: Implement a more advanced algorithm for block validation across multiple nodes.
+- **Blockchain UI**: Create an interface to visualize the blockchain.
+- **Transaction Pool**: Manage pending transactions with a more complex system.
+
